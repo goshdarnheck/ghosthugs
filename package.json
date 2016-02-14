@@ -1,0 +1,19 @@
+{
+  "name": "ghosthugs",
+  "version": "1.0.0",
+  "description": "Ghosthugs website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://matthew_rapati@bitbucket.org/matthew_rapati/ghosthugs.git"
+  },
+  "author": "Matthew Rapati",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/matthew_rapati/ghosthugs#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
