@@ -1,75 +1,52 @@
-$(function() {
-	// BIG TIME USEFUL VARIABLES
-	var winW = $(window).width();
-	var winH = $(window).height();
-	
-	// EMITTERS
+window.onload = function() {
+	function getDocHeight() {
+		var D = document;
+		return Math.max(
+			D.body.scrollHeight, D.documentElement.scrollHeight,
+			D.body.offsetHeight, D.documentElement.offsetHeight,
+			D.body.clientHeight, D.documentElement.clientHeight
+		);
+	}
+
+	var winW = document.body.clientWidth;
+	var winH = getDocHeight();
 	var starEmitter;
-	
-	// PLAYER
 	var player;
 	var playerSpeed = 5;
-	
-	// BADDIES
+	var baddieAmount = 10;
 	var baddieTypes = [
-		{
-			'color': 0xff0000,
-			'effect': 'tiny'
-		},
-		{
-			'color': 0x00ff00,
-			'effect': 'big'
-		},
-		{
-			'color': 0x0000ff,
-			'effect': 'big'
-		},
-		{
-			'color': 0x00ffff,
-			'effect': 'big'
-		},
-		{
-			'color': 0xffff00,
-			'effect': 'big'
-		},
-		{
-			'color': 0xff00ff,
-			'effect': 'small'
-		},
-		{
-			'color': 0xff9900,
-			'effect': 'small'
-		},
-		{
-			'color': 0xff0099,
-			'effect': 'big'
-		},
-		{
-			'color': 0x0099ff,
-			'effect': 'big'
-		},
-		{
-			'color': 0x9900ff,
-			'effect': 'big'
-		}
+		{'color': 0xff0000, 'effect': 'tiny'},
+		{'color': 0x00ff00, 'effect': 'big'},
+		{'color': 0x0000ff, 'effect': 'big'},
+		{'color': 0x00ffff, 'effect': 'big'},
+		{'color': 0xffff00, 'effect': 'big'},
+		{'color': 0xff00ff, 'effect': 'small'},
+		{'color': 0xff9900, 'effect': 'small'},
+		{'color': 0xff0099, 'effect': 'big'},
+		{'color': 0x0099ff, 'effect': 'big'},
+		{'color': 0x9900ff, 'effect': 'big'}
 	];
-	
-	// CREATE THE GAME
+
 	var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'game', { preload: preload, create: create, update: update});
-	
+
 	// LOAD ASSETS
 	function preload() {
-		game.load.image('ghostshugging', 'game/sprites/ghostshugging.png');
-		game.load.image('ghost', 'game/sprites/ghost.png');
-		game.load.image('spark', 'game/sprites/spark.png');
+		game.load.image('ghostshugging', 'images/sprites/ghostshugging.png');
+		game.load.image('ghost', 'images/sprites/ghost.png');
+		game.load.image('spark', 'images/sprites/spark.png');
 	}
-	
+
 	// RUNS WHEN THE GAME STARTS
 	function create() {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		
 		game.stage.backgroundColor = '#0072bc';
-		
+		game.stage.smoothed = false;
+		// Phaser.Canvas.setSmoo
+		// game.scaleMode = Phaser.ScaleManager.NO_SCALE;
+		// game.scaleMode = Phaser.ScaleManager.USER_SCALE;
+		// game.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
 		// LOGO SETUP
 		logo = game.add.sprite(game.world.centerX, game.world.centerY, 'ghostshugging');
 		logo.smoothed = false;
@@ -82,7 +59,7 @@ $(function() {
 		starEmitter.gravity = 0;
 		starEmitter.forEach(function(particle) {
 			particle.smoothed = false;
-			particle.tint = Math.random() * 0xffff00;
+			particle.tint = 0xffffff;
 		});
 		starEmitter.minParticleScale = 0.5;
 		starEmitter.maxParticleScale = 3;
@@ -97,7 +74,7 @@ $(function() {
 		
 		// BADDIES SETUP
 		baddies = game.add.group();
-		for (var i = 0; i < 40; i++) {
+		for (var i = 0; i < baddieAmount; i++) {
 			var baddieType = game.rnd.integerInRange(0, baddieTypes.length - 1);
 			var baddie = baddies.create(game.rnd.integerInRange(10, winW - 10), game.rnd.integerInRange(10, winH - 10), 'ghost');
 			baddie.smoothed = false;
@@ -108,13 +85,13 @@ $(function() {
 			baddie.randomDestinationCounter = 0;
 		}
 	}
-	
+
 	function particleBurst() {
 		starEmitter.x = player.x
 		starEmitter.y = player.y
 		starEmitter.start(true, 3000, null, 10);
 	}
-	
+
 	// BIG GAME LOOP
 	function update() {
 		if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x - player.width / 2 - 1 > 0) {
@@ -129,9 +106,11 @@ $(function() {
 			player.y += playerSpeed;
 		}
 		
-		baddies.forEachAlive(baddieUpdate, this);  //make bullets accelerate to ship
+		baddies.forEachAlive(baddieUpdate, this);
 		
 		if (player.scale.x == 10 && player.goal == false) {
+			player.scale.x = 1;
+			player.scale.y = 1;
 			player.goal = true;
 			
 			logo.scale.x = Math.min(logo.scale.x + 1, 30);
@@ -141,10 +120,10 @@ $(function() {
 		}
 		
 		starEmitter.forEachAlive(function(p){
-			p.alpha= p.lifespan / starEmitter.lifespan;
+			p.alpha = p.lifespan / starEmitter.lifespan;
 		});
 	}
-	
+
 	function playerBaddieOverlap(player, baddie) {
 		baddie.kill();
 
@@ -170,7 +149,7 @@ $(function() {
 		recycledBaddie.tint = baddieTypes[recycledBaddieType].color;
 		recycledBaddie.effect = baddieTypes[recycledBaddieType].effect;
 	}
-	
+
 	function baddieUpdate(baddie) { 
 		var randomMovement = (game.rnd.integerInRange(0, 100) > 99) ? true : false;
 		
@@ -195,23 +174,24 @@ $(function() {
 		}
 		
 		game.physics.arcade.overlap(player, baddie, playerBaddieOverlap, null, this);
-		// distanceBetween(source, target) 
 	}
-	
+
 	// FOR RESIZING THE SCREEN
-	$(window).resize(function() {
+	window.addEventListener('resize', function(ev) {
 		resizeGame();
 	});
-	
+
 	function resizeGame() {
-		var height = $(window).height();
-		var width = $(window).width();
-		
-		game.width = width;
-		game.height = height;
-		game.stage.bounds.width = width;
-		game.stage.bounds.height = height;
-		
+		var width = document.body.clientWidth;
+		var height = getDocHeight();
+
+		// game.width = width;
+		// game.height = height;
+
+		game.scale.setGameSize(width, height);
+		game.stage.getBounds.width = width;
+		game.stage.getBounds.height = height;
+
 		if (game.renderType === Phaser.WEBGL) {
 			game.renderer.resize(width, height);
 		}
@@ -227,4 +207,4 @@ $(function() {
 		logo.x = Math.round(game.width / 2);
 		logo.y = Math.round(game.height / 2);
 	}
-});
+};

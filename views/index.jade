@@ -1,5 +1,21 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    base(href="//localhost:3000/")
+    title= title
+    link(rel="stylesheet", href="css/ghosthugs.css")
+    link(rel="icon",type="image/png", href="game/sprites/ghost.png")
+  body
+    #game
+      .controls
+        span ↑
+        br
+        span ←
+        span →
+        span ↓
+        p Use your arrow keys!
+      .credits
+        p Created by #[a(target="_blank", href="http://ghosthugs.itch.io") ghosthugs!]
+    script(src="js/phaser.min.js")
+    script(src="js/ghosthugs.min.js")
