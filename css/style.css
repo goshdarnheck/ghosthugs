@@ -1,75 +1,106 @@
 body {
-	height: 100%;
-	font-family: monospace;
-	color: white;
-	overflow: hidden;
-	text-shadow: 1px 1px 0px #707;
+  height: 100%;
+  font-family: monospace;
+  color: white;
+  overflow: hidden;
+  text-shadow: 1px 1px 0px #707;
 }
 
 .controls {
-	left: 0;
-	padding: 1em;
-	position: absolute;
-	top: 0;
-	text-align: center;
-	opacity: 0.8;
+  left: 0;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  text-align: center;
+  opacity: 0.8;
 
-	-webkit-transition: opacity .5s ease-in-out;
-	-moz-transition: opacity .5s ease-in-out;
-	-ms-transition: opacity .5s ease-in-out;
-	-o-transition: opacity .5s ease-in-out;
-	transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .controls:hover {
-	opacity: 1;
-	cursor: crosshair;
+  opacity: 1;
+  cursor: crosshair;
 }
 
 .controls span {
-	background: #f9f;
-	background: rgba(255,153,255,1);
-	background: -moz-linear-gradient(left, rgba(255,153,255,1) 0%, rgba(255,170,255,1) 35%, rgba(255,124,216,1) 100%);
-	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,153,255,1)), color-stop(35%, rgba(255,170,255,1)), color-stop(100%, rgba(255,124,216,1)));
-	background: -webkit-linear-gradient(left, rgba(255,153,255,1) 0%, rgba(255,170,255,1) 35%, rgba(255,124,216,1) 100%);
-	background: -o-linear-gradient(left, rgba(255,153,255,1) 0%, rgba(255,170,255,1) 35%, rgba(255,124,216,1) 100%);
-	background: -ms-linear-gradient(left, rgba(255,153,255,1) 0%, rgba(255,170,255,1) 35%, rgba(255,124,216,1) 100%);
-	background: linear-gradient(to right, rgba(255,153,255,1) 0%, rgba(255,170,255,1) 35%, rgba(255,124,216,1) 100%);
+  background: #f9f;
+  background: rgba(255, 153, 255, 1);
+  background: -moz-linear-gradient(
+    left,
+    rgba(255, 153, 255, 1) 0%,
+    rgba(255, 170, 255, 1) 35%,
+    rgba(255, 124, 216, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(255, 153, 255, 1)),
+    color-stop(35%, rgba(255, 170, 255, 1)),
+    color-stop(100%, rgba(255, 124, 216, 1))
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 153, 255, 1) 0%,
+    rgba(255, 170, 255, 1) 35%,
+    rgba(255, 124, 216, 1) 100%
+  );
+  background: -o-linear-gradient(
+    left,
+    rgba(255, 153, 255, 1) 0%,
+    rgba(255, 170, 255, 1) 35%,
+    rgba(255, 124, 216, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    left,
+    rgba(255, 153, 255, 1) 0%,
+    rgba(255, 170, 255, 1) 35%,
+    rgba(255, 124, 216, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(255, 153, 255, 1) 0%,
+    rgba(255, 170, 255, 1) 35%,
+    rgba(255, 124, 216, 1) 100%
+  );
 
-	border: 1px solid #f4f;
-	border-radius: 0.2em;
-	box-shadow: 1px 0 1px 0 #e9e, 0 2px 0 2px #c6c, 0 2px 0 3px #808;
-	color: #fef;
-	display: inline-block;
-	font-size: 0.8em;
-	margin: 0.3em;
-	padding: 0.3em;
-	text-align: center;
-	text-shadow: 1px 1px 0px #303;
-	width: 1.6em;
+  border: 1px solid #f4f;
+  border-radius: 0.2em;
+  box-shadow: 1px 0 1px 0 #e9e, 0 2px 0 2px #c6c, 0 2px 0 3px #808;
+  color: #fef;
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 0.3em;
+  padding: 0.3em;
+  text-align: center;
+  text-shadow: 1px 1px 0px #303;
+  width: 1.6em;
 }
 
 .controls p,
 .credits p {
-	font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .controls p {
-	font-style: italic;
-	padding-top: 1em;
+  font-style: italic;
+  padding-top: 1em;
 }
 
 .credits {
-	bottom: 0;
-	padding: 1em;
-	position: absolute;
-	right: 0;
+  bottom: 0;
+  padding: 1em;
+  position: absolute;
+  right: 0;
 }
 
 .credits a {
-	color: white;
+  color: white;
 }
 
 .credits a:hover {
-	color: magenta;
+  color: magenta;
 }
